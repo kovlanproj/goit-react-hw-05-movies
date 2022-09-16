@@ -8,6 +8,7 @@ const Home = () => {
   useEffect(() => {
     getTrendingMovies('day').then(setMovies);
   }, []);
+
   return <div>{movies.length > 0 && <MoviesList movies={movies} />}</div>;
 };
 

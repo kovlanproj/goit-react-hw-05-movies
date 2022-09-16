@@ -16,7 +16,6 @@ const MovieInfo = () => {
   if (!movie) {
     return null;
   }
-  console.log(movie);
   return (
     <>
       <div>{movie.title}</div>
