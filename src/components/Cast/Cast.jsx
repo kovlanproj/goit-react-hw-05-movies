@@ -15,7 +15,6 @@ export const Cast = () => {
     return null;
   }
 
-  console.log(movieCast);
   return (
     <div>
       Cast list {movieId}

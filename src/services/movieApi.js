@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const API_KEY = '1e47046f2fa6627c23534650c78833b4';
 const BASE_URL = 'https://api.themoviedb.org/3';
-const IMAGE_URL = 'https://image.tmdb.org/t/p/w200';
+export const IMAGE_URL = 'https://image.tmdb.org/t/p/w200';
 const lang = 'en-US';
 
 export const getTrendingMovies = async period => {
