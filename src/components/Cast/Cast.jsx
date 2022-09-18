@@ -19,14 +19,11 @@ export const Cast = () => {
     <div>
       Cast list {movieId}
       <ul>
-        <li>
-          {movieCast.map(movieCastItem => (
-            <MovieCastItem
-              key={movieCastItem.id}
-              movieCastItem={movieCastItem}
-            />
-          ))}
-        </li>
+        {movieCast.map(movieCastItem => (
+          <li key={movieCastItem.id}>
+            <MovieCastItem movieCastItem={movieCastItem} />
+          </li>
+        ))}
       </ul>
     </div>
   );

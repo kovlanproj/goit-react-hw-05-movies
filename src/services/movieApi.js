@@ -6,10 +6,14 @@ export const IMAGE_URL = 'https://image.tmdb.org/t/p/w200';
 const lang = 'en-US';
 
 export const getTrendingMovies = async period => {
-  const response = await axios.get(
-    `${BASE_URL}/trending/movie/${period}?api_key=${API_KEY}`
-  );
-  return response.data.results;
+  try {
+    const response = await axios.get(
+      `${BASE_URL}/trending/movie/${period}?api_key=${API_KEY}`
+    );
+    return response.data.results;
+  } catch (error) {
+    console.log(error.message);
+  }
 };
 
 export const getMovieInfo = async id => {
@@ -21,7 +25,7 @@ export const getMovieInfo = async id => {
 
 export const getMovieCredits = async id => {
   const response = await axios.get(
-    `${BASE_URL}/movie/${id}/credits?api_key=${API_KEY}&language=${lang}`
+    `${BASE_URL}/movie/${id}/credits?api_key=${API_KEY}&language=${lang}&p=1`
   );
 
   return response.data.cast;
@@ -31,5 +35,5 @@ export const getMovieReviews = async id => {
   const response = await axios.get(
     `${BASE_URL}/movie/${id}/reviews?api_key=${API_KEY}&language=${lang}`
   );
-  return response.data;
+  return response.data.results;
 };

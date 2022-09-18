@@ -7,7 +7,15 @@ export const MovieCastItem = ({
     <div>
       {name} - {character}
       <p>
-        <img src={`${IMAGE_URL}${profile_path}`} alt="" />
+        {profile_path ? (
+          <img
+            src={`${IMAGE_URL}${profile_path}`}
+            alt={`${name}`}
+            width="100"
+          />
+        ) : (
+          'No image'
+        )}
       </p>
     </div>
   );

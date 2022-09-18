@@ -1,5 +1,12 @@
+import { SearchBox } from 'components/SeearchBox';
+
 const Movies = () => {
-  return <div>Movies</div>;
+  return (
+    <div>
+      Movies
+      <SearchBox />
+    </div>
+  );
 };
 
 export default Movies;
