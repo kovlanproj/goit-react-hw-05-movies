@@ -1,4 +1,4 @@
-export const SearchBox = () => {
+export const SearchBox = ({ value, onSearch }) => {
   return (
     <form autoComplete="off">
       <input type="text" name="query" />
