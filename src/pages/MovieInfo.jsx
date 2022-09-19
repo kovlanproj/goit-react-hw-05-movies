@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
+import { IMAGE_URL } from 'services/movieApi';
+import { Movie, Img, MovieaAditionalInfo } from './MovieInfo.styled';
 
 import { getMovieInfo } from 'services/movieApi';
 
@@ -10,8 +12,9 @@ const MovieInfo = () => {
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
   const location = useLocation();
-  const backLinkHref = location.state?.from ?? '/movies';
 
+  const backLinkHref = location.state?.from ?? '/movies';
+  console.log(backLinkHref);
   useEffect(() => {
     getMovieInfo(movieId).then(setMovie);
   }, [movieId]);
@@ -19,13 +22,32 @@ const MovieInfo = () => {
   if (!movie) {
     return null;
   }
+  const { title, poster_path, overview, genres, vote_average } = movie;
 
   return (
     <>
       <GoBackBtn path={backLinkHref} />
-      <div>{movie.title}</div>
-      <NavLink to={`cast`}>Cast</NavLink>
-      <NavLink to={`reviews`}>Reviews</NavLink>
+      <Movie>
+        <Img src={`${IMAGE_URL}${poster_path}`} alt={`${title}`} width="200" />
+        <div>
+          <h2>{title}</h2>
+          <p>User score: {Math.round(vote_average * 10)}%</p>
+          <h3>Overview</h3>
+          <p>{overview}</p>
+          <h3>Genres</h3>
+          <p>{genres.map(genre => genre.name + ' ')}</p>
+        </div>
+      </Movie>
+      <MovieaAditionalInfo>
+        Additional information:
+        <li>
+          <NavLink to={`cast`}>Cast</NavLink>
+        </li>
+        <li>
+          <NavLink to={`reviews`}>Reviews</NavLink>
+        </li>
+      </MovieaAditionalInfo>
+
       <Outlet />
     </>
   );

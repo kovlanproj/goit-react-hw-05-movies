@@ -15,7 +15,6 @@ export const Reviews = () => {
     return null;
   }
 
-  console.log('reviews', movieReviews);
   return (
     <div>
       {movieReviews.length === 0 && 'We don`t have any reviews for this movie.'}

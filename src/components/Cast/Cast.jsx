@@ -17,7 +17,6 @@ export const Cast = () => {
 
   return (
     <div>
-      Cast list {movieId}
       <ul>
         {movieCast.map(movieCastItem => (
           <li key={movieCastItem.id}>
