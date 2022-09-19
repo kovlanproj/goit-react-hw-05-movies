@@ -1,7 +1,9 @@
 import { useSearchParams } from 'react-router-dom';
 import { SearchBox } from 'components/SeearchBox';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { getMovieByName } from 'services/movieApi';
+import { MoviesList } from 'components/MoviesList/MoviesList';
+import { useEffect } from 'react';
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
@@ -9,25 +11,33 @@ const Movies = () => {
 
   const [query, setQuery] = useState(() => searchParams.get('query') ?? '');
   // setQuery(searchParams.get('filter') ?? '');
+  const searchQuery = searchParams.get('query');
+  const onChangeFilter = query => {
+    setQuery(query);
+  };
 
-  const onSearch = value => {
-    setSearchParams(value !== '' ? { query: value } : {});
-    setQuery(value);
+  const onSearch = e => {
+    e.preventDefault();
+    // const value = e.target.value;
+    setSearchParams(query !== '' ? { query: query } : {});
+    // setQuery(value);
   };
 
   useEffect(() => {
-    if (query !== '') {
-      getMovieByName(query).then(setMovies);
+    if (searchQuery) {
+      getMovieByName(searchQuery).then(setMovies);
     }
-  }, [query]);
+  }, [searchQuery]);
 
   return (
     <div>
       Movies
-      <SearchBox value={query} onSearch={onSearch} />
-      {movies.map(movie => (
-        <p>{movie.title}</p>
-      ))}
+      <SearchBox
+        value={query}
+        onSearch={onSearch}
+        onChangeFilter={onChangeFilter}
+      />
+      {movies.length > 0 && <MoviesList movies={movies} />}
     </div>
   );
 };
