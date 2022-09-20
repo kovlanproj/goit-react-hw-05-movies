@@ -4,9 +4,10 @@ import { useState } from 'react';
 import { getMovieByName } from 'services/movieApi';
 import { MoviesList } from 'components/MoviesList/MoviesList';
 import { useEffect } from 'react';
+import { MoviesBox } from './Movies.styled';
 
 const Movies = () => {
-  const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [query, setQuery] = useState(() => searchParams.get('query') ?? '');
@@ -30,15 +31,18 @@ const Movies = () => {
   }, [searchQuery]);
 
   return (
-    <div>
+    <MoviesBox>
       Movies
       <SearchBox
         value={query}
         onSearch={onSearch}
         onChangeFilter={onChangeFilter}
       />
-      {movies.length > 0 && <MoviesList movies={movies} />}
-    </div>
+      {movies && <MoviesList movies={movies} />}
+      {movies && movies.length === 0 && (
+        <div>There are not movies with such name</div>
+      )}
+    </MoviesBox>
   );
 };
 

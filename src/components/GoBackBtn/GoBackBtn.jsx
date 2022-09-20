@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 export const GoBackBtn = ({ path }) => {
   const navigate = useNavigate();
@@ -8,4 +9,8 @@ export const GoBackBtn = ({ path }) => {
       Go Back
     </button>
   );
+};
+
+GoBackBtn.propTypes = {
+  path: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 };

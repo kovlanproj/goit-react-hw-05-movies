@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 export const SearchBox = ({ value, onSearch, onChangeFilter }) => {
   return (
     <form autoComplete="off" onSubmit={onSearch}>
@@ -10,4 +12,10 @@ export const SearchBox = ({ value, onSearch, onChangeFilter }) => {
       <button type="submit">Search</button>
     </form>
   );
+};
+
+SearchBox.propTypes = {
+  value: PropTypes.string,
+  onSearch: PropTypes.func,
+  onChangeFilter: PropTypes.func,
 };
